@@ -24,5 +24,15 @@ class CartItem(BaseModel):
     
     
     
-# class Carts(BaseModel):
-#     product= models.ForeignKey(CartItem,on_delete=models.CASCADE, related_name='carts')
+class Cart(BaseModel):
+    carts = models.ManyToManyField(
+        CartItem, related_name='carts')
+ 
+    def grand_total(self):
+        grand_total = 0
+        for cart in self.carts.all():
+            grand_total += cart.product.price
+        return grand_total
+    
+    def __str__(self):
+        return f"{self.user.username} cart created."
