@@ -13,7 +13,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
     class Meta:
-        verbose_name_plural="categories"
+        verbose_name_plural="categories" # to put name on web
         ordering=('-updated',)
     
 class Product(models.Model):
