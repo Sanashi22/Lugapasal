@@ -1,10 +1,11 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from .models import CartItem, Cart
+from .models import Cart
+from django.contrib.auth.models import User
+from rest_framework.authtoken.models import Token
 
-@receiver (post_save, sender= CartItem)
-def add_to_cart(sender, instance, created, *args, **kwargs):
+@receiver(post_save, sender=User)
+def create_cart(sender, instance, created, **kwargs):
     if created:
-        print('instance->','instance')
-        Cart.objects.create(carts=instance)
-        # Cart.objects.add(instance)
+        Cart.objects.create(user=instance)
+        Token.objects.create(user=instance)
