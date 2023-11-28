@@ -28,7 +28,7 @@ class CartItemModelViewSet(ModelViewSet):
 
     def perform_create(self, serializer):
  
-        cart = Cart.objects.get(user=self.request.user)
+        cart,_ = Cart.objects.get_or_create(user=self.request.user) #underscore is used not to used the variable unused variables (ignoring values)
         serializer.save(user=self.request.user, cart=cart)
  
     def get_serializer_class(self):
@@ -38,8 +38,6 @@ class CartItemModelViewSet(ModelViewSet):
             return UpdateCartSerializer
         return CartItemSerializer
        
-    
-    
     
     
 class CartModelViewSet(ModelViewSet):

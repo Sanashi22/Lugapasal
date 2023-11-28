@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django_filters',
     'cart',
     'account',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'order'
 ]
 
 MIDDLEWARE = [
